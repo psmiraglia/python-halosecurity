@@ -20,9 +20,24 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
-from halosecurity.base import HaloSecurityAPIEndpoint
+from restfly.endpoint import APIEndpoint
+
+from halosecurity.base.iterators import APIResultsIterator
 
 
-class UserAPI(HaloSecurityAPIEndpoint):
-    _path = 'user'
-    _list_query_args = ['sort', 'sort_desc', 'email', 'name']
+class HaloSecurityAPIEndpoint(APIEndpoint):
+    _path = ''
+    _list_query_args = []
+
+    def list(self, **kwargs):
+        query = {}
+        for k in self._list_query_args:
+            v = kwargs.get(k, None)
+            if v:
+                query[k] = v
+
+        return APIResultsIterator(
+            self._api,
+            _query=query,
+            _path=f'{self._path}/list.json'
+        )

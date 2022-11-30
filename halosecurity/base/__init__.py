@@ -20,8 +20,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
+from halosecurity.base.endpoints import HaloSecurityAPIEndpoint  # noqa
 from halosecurity.base.iterators import APIResultsIterator  # noqa
 
 _all_ = [
-    'APIResultsIterator'
+    'APIResultsIterator',
+    'HaloSecurityAPIEndpoint'
 ]

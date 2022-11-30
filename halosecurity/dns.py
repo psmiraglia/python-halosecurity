@@ -20,35 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
-from restfly.endpoint import APIEndpoint
-
-from halosecurity.base import APIResultsIterator
+from halosecurity.base import HaloSecurityAPIEndpoint
 
 
-class DnsAPI(APIEndpoint):
+class DnsAPI(HaloSecurityAPIEndpoint):
     _path = 'dns'
-
-    def list(self, **kwargs):
-        query = {}
-
-        sort = kwargs.get('sort', None)
-        if sort:
-            query['sort'] = sort
-
-        sort_desc = kwargs.get('sort_desc', 0)
-        if sort_desc:
-            query['sort_desc'] = sort_desc
-
-        email = kwargs.get('email', None)
-        if email:
-            query['email'] = email
-
-        name = kwargs.get('name', None)
-        if name:
-            query['name'] = name
-
-        return APIResultsIterator(
-            self._api,
-            _query=query,
-            _path=f'{self._path}/list.json'
-        )
+    _list_query_args = ['sort', 'sort_desc', 'type', 'value', 'host']
