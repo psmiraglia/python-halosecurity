@@ -20,39 +20,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
-from restfly.session import APISession
-
-from halosecurity.dns import DnsAPI
-from halosecurity.port import PortAPI
-from halosecurity.target import TargetAPI
-from halosecurity.user import UserAPI
+from halosecurity.base import HaloSecurityAPIEndpoint
 
 
-class HaloSecurity(APISession):
-    _url = 'https://api.halosecurity.com/api/v1'
-
-    def _authenticate(self, **kwargs):
-        print('Authenticate')
-        api_key = kwargs.get('api_key', None)
-        if api_key:
-            self._session.headers.update({
-                'x-apikey': api_key
-            })
-        else:
-            self._log.warn('Starting an unauthenticated session')
-
-    @property
-    def user(self):
-        return UserAPI(self)
-
-    @property
-    def target(self):
-        return TargetAPI(self)
-
-    @property
-    def dns(self):
-        return DnsAPI(self)
-
-    @property
-    def port(self):
-        return PortAPI(self)
+class PortAPI(HaloSecurityAPIEndpoint):
+    _path = 'port'
+    _list_query_args = ['state', 'service', 'protocol', 'port', 'risk']
