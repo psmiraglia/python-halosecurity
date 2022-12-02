@@ -20,9 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 '''
 
-from halosecurity.base import HaloSecurityAPIEndpoint
 
-
-class PortAPI(HaloSecurityAPIEndpoint):
-    _path = 'port'
-    _query_args_list = ['state', 'service', 'protocol', 'port', 'risk']
+class EndpointDoesNotExist(Exception):
+    def __init__(self, path, ep):
+        self.message = f'Endpoint does not exist: /{path}/{ep}.json'
+        super(EndpointDoesNotExist, self).__init__(self.message)

@@ -22,22 +22,58 @@ SOFTWARE.
 
 from restfly.endpoint import APIEndpoint
 
-from halosecurity.base.iterators import APIResultsIterator
+from halosecurity.base.exceptions import EndpointDoesNotExist
+from halosecurity.base.results import APIResult, APIResultsIterator
 
 
 class HaloSecurityAPIEndpoint(APIEndpoint):
+    # the API path (e.g. /target/)
     _path = ''
-    _list_query_args = []
+
+    # parameters for the "/list.json" endpoint
+    _query_args_list = []
+
+    # parameters for the "/get.json" endpoint
+    _query_args_get = []
 
     def list(self, **kwargs):
+        ep = 'list'
+
+        # check if endpoint exists
+        query_args = self._query_args_list
+        if not query_args:
+            raise EndpointDoesNotExist(self._path, ep)
+
+        # build query
         query = {}
-        for k in self._list_query_args:
+        for k in query_args:
             v = kwargs.get(k, None)
             if v:
                 query[k] = v
 
+        # get the API result
         return APIResultsIterator(
             self._api,
             _query=query,
-            _path=f'{self._path}/list.json'
+            _path=f'{self._path}/{ep}.json'
+        )
+
+    def get(self, resource_id):
+        ep = 'get'
+
+        # check if endpoint exists
+        query_args = self._query_args_get
+        if not query_args:
+            raise EndpointDoesNotExist(self._path, ep)
+
+        # build the query
+        query = {}
+        for k in query_args:
+            query[k] = resource_id
+
+        # get the API result
+        return APIResult(
+            self._api,
+            _query=query,
+            _path=f'{self._path}/{ep}.json'
         )

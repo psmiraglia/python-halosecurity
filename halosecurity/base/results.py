@@ -21,6 +21,28 @@ SOFTWARE.
 '''
 
 
+class APIResult:
+    def __init__(self, api, **kwargs):
+        self._api = api
+        self._query = kwargs.get('_query')
+        self._path = kwargs.get('_path')
+
+    def get_data(self):
+        # init data
+        data = {}
+
+        # make the API call
+        resp = self._api.get(self._path, params=self._query)
+
+        # check the response
+        if ((resp.status_code >= 200)
+                and (resp.status_code < 300)
+                and (resp.headers.get('Content-Type') == 'application/json')):
+            data = resp.json()
+
+        return data
+
+
 class APIResultsIterator:
     # The current number of records that have been returned
     count = 0

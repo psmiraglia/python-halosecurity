@@ -25,4 +25,4 @@ from halosecurity.base import HaloSecurityAPIEndpoint
 
 class DnsAPI(HaloSecurityAPIEndpoint):
     _path = 'dns'
-    _list_query_args = ['sort', 'sort_desc', 'type', 'value', 'host']
+    _query_args_list = ['sort', 'sort_desc', 'type', 'value', 'host']

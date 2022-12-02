@@ -21,9 +21,11 @@ SOFTWARE.
 '''
 
 from halosecurity.base.endpoints import HaloSecurityAPIEndpoint  # noqa
-from halosecurity.base.iterators import APIResultsIterator  # noqa
+from halosecurity.base.results import APIResult  # noqa
+from halosecurity.base.results import APIResultsIterator  # noqa
 
 _all_ = [
+    'APIResult',
     'APIResultsIterator',
     'HaloSecurityAPIEndpoint'
 ]

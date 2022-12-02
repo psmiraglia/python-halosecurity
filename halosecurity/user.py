@@ -25,4 +25,5 @@ from halosecurity.base import HaloSecurityAPIEndpoint
 
 class UserAPI(HaloSecurityAPIEndpoint):
     _path = 'user'
-    _list_query_args = ['sort', 'sort_desc', 'email', 'name']
+    _query_args_get = ['user_id'],
+    _query_args_list = ['sort', 'sort_desc', 'email', 'name']

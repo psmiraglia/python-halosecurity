@@ -25,4 +25,5 @@ from halosecurity.base import HaloSecurityAPIEndpoint
 
 class TargetAPI(HaloSecurityAPIEndpoint):
     _path = 'target'
-    _list_query_args = ['sort', 'sort_desc']
+    _query_args_get = ['target_id']
+    _query_args_list = ['sort', 'sort_desc']
