@@ -39,6 +39,17 @@ with HaloSecurity(api_key=api_key) as api:
     
     for user in api.user.list(name='riccardo'):
         print(json.dumps(user, indent=2))
+
+    try:
+        target = api.traget.get(12345)
+        data = target.get_data()
+        print(json.dumps(data, indent=2))
+        
+        port = api.port.get(12345)
+        data = port.get_data()
+        print(json.dumps(data, indent=2))
+    except Exception as e:
+        print(f'Error: {e}')
 ~~~
 
 ## References
