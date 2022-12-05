@@ -22,10 +22,24 @@ SOFTWARE.
 
 from restfly.session import APISession
 
+from halosecurity.account import AccountAPI
+from halosecurity.aknowledged import AknowledgedAPI
+from halosecurity.discovery import DiscoveryAPI
 from halosecurity.dns import DnsAPI
+from halosecurity.event import EventAPI
+from halosecurity.file import FileAPI
+from halosecurity.http import HttpAPI
+from halosecurity.issue import IssueAPI
+from halosecurity.pci import PciAPI
 from halosecurity.port import PortAPI
+from halosecurity.scan import ScanAPI
+from halosecurity.security import SecurityAPI
+from halosecurity.tag import TagAPI
 from halosecurity.target import TargetAPI
+from halosecurity.technology import TechnologyAPI
 from halosecurity.user import UserAPI
+from halosecurity.website import WebsiteAPI
+from halosecurity.whois import WhoisAPI
 
 
 class HaloSecurity(APISession):
@@ -42,17 +56,73 @@ class HaloSecurity(APISession):
             self._log.warn('Starting an unauthenticated session')
 
     @property
-    def user(self):
-        return UserAPI(self)
+    def account(self):
+        return AccountAPI(self)
 
     @property
-    def target(self):
-        return TargetAPI(self)
+    def aknowledged(self):
+        return AknowledgedAPI(self)
+
+    @property
+    def discovery(self):
+        return DiscoveryAPI(self)
 
     @property
     def dns(self):
         return DnsAPI(self)
 
     @property
+    def event(self):
+        return EventAPI(self)
+
+    @property
+    def file(self):
+        return FileAPI(self)
+
+    @property
+    def http(self):
+        return HttpAPI(self)
+
+    @property
+    def issue(self):
+        return IssueAPI(self)
+
+    @property
+    def pci(self):
+        return PciAPI(self)
+
+    @property
     def port(self):
         return PortAPI(self)
+
+    @property
+    def scan(self):
+        return ScanAPI(self)
+
+    @property
+    def security(self):
+        return SecurityAPI(self)
+
+    @property
+    def tag(self):
+        return TagAPI(self)
+
+    @property
+    def target(self):
+        return TargetAPI(self)
+
+    @property
+    def technology(self):
+        return TechnologyAPI(self)
+
+    @property
+    def user(self):
+        return UserAPI(self)
+
+    @property
+    def website(self):
+        return WebsiteAPI(self)
+
+    @property
+    def whois(self):
+        return WhoisAPI(self)
