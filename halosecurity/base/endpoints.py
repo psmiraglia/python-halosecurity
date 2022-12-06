@@ -77,3 +77,17 @@ class HaloSecurityAPIEndpoint(APIEndpoint):
             _query=query,
             _path=f'{self._path}/{ep}.json'
         )
+
+    def _get(self, ep, query, **kwargs):
+        return APIResult(
+            self._api,
+            _query=query,
+            _path=f'{self._path}/{ep}'
+        )
+
+    def _list(self, ep, query, **kwargs):
+        return APIResultsIterator(
+            self._api,
+            _query=query,
+            _path=f'{self._path}/{ep}'
+        )

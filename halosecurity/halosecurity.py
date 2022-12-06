@@ -23,7 +23,7 @@ SOFTWARE.
 from restfly.session import APISession
 
 from halosecurity.account import AccountAPI
-from halosecurity.aknowledged import AknowledgedAPI
+from halosecurity.ack import AckAPI
 from halosecurity.discovery import DiscoveryAPI
 from halosecurity.dns import DnsAPI
 from halosecurity.event import EventAPI
@@ -60,8 +60,8 @@ class HaloSecurity(APISession):
         return AccountAPI(self)
 
     @property
-    def aknowledged(self):
-        return AknowledgedAPI(self)
+    def ack(self):
+        return AckAPI(self)
 
     @property
     def discovery(self):
