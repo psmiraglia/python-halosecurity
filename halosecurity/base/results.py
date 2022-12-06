@@ -96,6 +96,8 @@ class APIResultsIterator:
 
         # get page
         resp = self._api.get(self._path, params=query).json()
+        if ('pagination' not in resp) or ('list' not in resp):
+            raise Exception(f'Results are not iterable [{resp}]')
 
         # increase the starting point for the next call (if any)
         self._start += self._limit
